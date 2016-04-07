@@ -37,6 +37,7 @@
 static ParseManager *currentParseManager_;
 
 static BOOL shouldEnableLocalDatastore_;
+static BOOL shouldAddHTTPBodyAsRequestProperty_;
 
 static NSString *applicationGroupIdentifier_;
 static NSString *containingApplicationBundleIdentifier_;
@@ -50,6 +51,15 @@ static NSString *containingApplicationBundleIdentifier_;
     }
 }
 
++ (void)enableAddHTTPBodyAsRequestProperty {
+    shouldAddHTTPBodyAsRequestProperty_ = YES;
+}
+
++ (BOOL)shouldAddHTTPBodyAsRequestProperty {
+    return shouldAddHTTPBodyAsRequestProperty_;
+}
+
+
 ///--------------------------------------
 #pragma mark - Connect
 ///--------------------------------------
@@ -57,7 +67,7 @@ static NSString *containingApplicationBundleIdentifier_;
 + (void)setApplicationId:(NSString *)applicationId clientKey:(NSString *)clientKey {
     PFConsistencyAssert([applicationId length], @"'applicationId' should not be nil.");
     PFConsistencyAssert([clientKey length], @"'clientKey' should not be nil.");
-    
+
     // Setup new manager first, so it's 100% ready whenever someone sends a request for anything.
     ParseManager *manager = [[ParseManager alloc] initWithApplicationId:applicationId clientKey:clientKey];
     [manager configureWithApplicationGroupIdentifier:applicationGroupIdentifier_

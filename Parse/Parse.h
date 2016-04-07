@@ -49,6 +49,9 @@ PF_ASSUME_NONNULL_BEGIN
 /// @name Connecting to Parse
 ///--------------------------------------
 
++ (void)enableAddHTTPBodyAsRequestProperty;
++ (BOOL)shouldAddHTTPBodyAsRequestProperty;
+
 /*!
  @abstract Sets the applicationId and clientKey of your application.
 
