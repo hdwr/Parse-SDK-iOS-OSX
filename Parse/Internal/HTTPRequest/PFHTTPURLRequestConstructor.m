@@ -7,6 +7,8 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+#import "Parse.h"
+
 #import "PFHTTPURLRequestConstructor.h"
 
 #import "PFAssert.h"
@@ -45,6 +47,11 @@ static NSString *const PFHTTPURLRequestContentTypeJSON = @"application/json; cha
                                                            options:(NSJSONWritingOptions)0
                                                              error:&error];
         PFConsistencyAssert(error == nil, @"Failed to serialize JSON with error = %@", error);
+
+        if ([Parse shouldAddHTTPBodyAsRequestProperty]) {
+            [NSURLProtocol setProperty:parameters       forKey:@"parameters" inRequest:request];
+            [NSURLProtocol setProperty:request.HTTPBody forKey:@"HTTPBody"   inRequest:request];
+        }
     }
     return request;
 }

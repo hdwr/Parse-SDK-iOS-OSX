@@ -75,6 +75,9 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Connecting to Parse
 ///--------------------------------------
 
++ (void)enableAddHTTPBodyAsRequestProperty;
++ (BOOL)shouldAddHTTPBodyAsRequestProperty;
+
 /**
  Sets the applicationId and clientKey of your application.
 

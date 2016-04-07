@@ -37,6 +37,7 @@
 
 static ParseManager *currentParseManager_;
 static ParseClientConfiguration *currentParseConfiguration_;
+static BOOL shouldAddHTTPBodyAsRequestProperty_;
 
 + (void)initialize {
     if (self == [Parse class]) {
@@ -48,6 +49,15 @@ static ParseClientConfiguration *currentParseConfiguration_;
         currentParseConfiguration_ = [ParseClientConfiguration emptyConfiguration];
     }
 }
+
++ (void)enableAddHTTPBodyAsRequestProperty {
+    shouldAddHTTPBodyAsRequestProperty_ = YES;
+}
+
++ (BOOL)shouldAddHTTPBodyAsRequestProperty {
+    return shouldAddHTTPBodyAsRequestProperty_;
+}
+
 
 ///--------------------------------------
 #pragma mark - Connect
